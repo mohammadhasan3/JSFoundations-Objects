@@ -11,7 +11,7 @@
  * - returns the name of the channel
  ****************************************************************/
 function getChannelName(channel) {
-  // Your code here
+  return channel.name;
 }
 
 /**************************************************************
@@ -20,7 +20,10 @@ function getChannelName(channel) {
  * - returns the number of videos that channel has
  ****************************************************************/
 function numberOfVideos(channel) {
-  // Your code here
+  let videoArray = [];
+  videoArray = channel.videos;
+  let length = videoArray.length;
+  return length;
 }
 
 /**************************************************************
@@ -34,6 +37,9 @@ function numberOfVideos(channel) {
  ****************************************************************/
 function channelHasVideo(videoTitle, channel) {
   // Your code here
+
+  let titleArray = channel.videos.map((video) => video.title);
+  return titleArray.includes(videoTitle);
 }
 
 /**************************************************************
@@ -46,6 +52,10 @@ function channelHasVideo(videoTitle, channel) {
  ****************************************************************/
 function getChannelByName(channelName, channels) {
   // Your code here
+  let newArray = channels.map((channelObject) => channelObject.name);
+
+  let index = newArray.indexOf(channelName);
+  return channels[index];
 }
 
 /**************************************************************
@@ -58,6 +68,17 @@ function getChannelByName(channelName, channels) {
  ****************************************************************/
 function getChannelByVideoTitle(videoTitle, channels) {
   // Your code here
+  let titleArray = [];
+  let checker = -1;
+  for (let i = 0; i < channels.length; i++) {
+    titleArray = channels[i].videos.map((video) => video.title);
+    if (titleArray.includes(videoTitle)) {
+      checker = i;
+      break;
+    }
+  }
+
+  return channels[checker];
 }
 
 /**************************************************************
@@ -70,6 +91,13 @@ function getChannelByVideoTitle(videoTitle, channels) {
  ****************************************************************/
 function searchChannels(query, channels) {
   // Your code here
+  let filteredArray = channels.filter(function (channelObject) {
+    return (
+      channelObject.name.includes(query) ||
+      channelObject.description.includes(query)
+    );
+  });
+  return filteredArray;
 }
 
 module.exports = {
